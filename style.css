@@ -53,3 +53,43 @@ body{
     align-items: center;
     height: 100vh;
 }
+
+.card {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    width: 900px;
+    border-radius: 10px;
+}
+
+.card-body{
+    
+}
+
+.card-image{
+    left:0;
+    right:0;
+    top: 16px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    position: absolute;
+    width: 40%;
+
+}
+
+.card-left{
+    background-color: #27355C;
+    width: 20%;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+}
+
+.card-right{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
