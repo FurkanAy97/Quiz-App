@@ -62,6 +62,14 @@ body{
     border-radius: 10px;
 }
 
+.question-card{
+    height: initial;
+    width: initial;
+}
+
+.card-body{
+    flex: inherit;
+}
 
 .card-image{
     left:0;
