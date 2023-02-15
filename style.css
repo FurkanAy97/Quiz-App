@@ -69,10 +69,13 @@ body{
 .question-card{
     height: initial;
     width: initial;
+    width: 360px;
 }
 
 .card-body{
     flex: inherit;
+    display: flex;
+    align-items: center;
 }
 
 .card-image{
@@ -129,4 +132,22 @@ body{
     bottom: 12px;
     left: 32px;
     right: 32px;
+}
+
+.question-container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.question-letter{
+    background-color: lightgray;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
 }

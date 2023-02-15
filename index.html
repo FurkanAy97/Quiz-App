@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">QuizApp</span>
@@ -31,22 +31,24 @@
           <a href="#">JS</a>
         </div>
         <div class="card-right">
-          <h5 class="card-title">Frage</h5>
-          <div class="card question-card mb-3">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-          <div class="card question-card mb-3">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-          <div class="card question-card mb-3">
-            <div class="card-body">This is some text within a card body.</div>
-          </div>
-          <div class="card question-card mb-3">
-            <div class="card-body">This is some text within a card body.</div>
+          <h5 class="card-title" id="questionText">Frage</h5>
+          <div class="question-container">
+            <div class="card question-card mb-3">
+              <div class="card-body" id="answer_1"></div>
+            </div>
+            <div class="card question-card mb-3">
+              <div class="card-body" id="answer_2"></div>
+            </div>
+            <div class="card question-card mb-3">
+              <div class="card-body" id="answer_3"></div>
+            </div>
+            <div class="card question-card mb-3">
+              <div class="card-body" id="answer_4"></div>
+            </div>
           </div>
           <div class="card-bottom">
             <div class="card-bottom-left">
-              <b>1</b> von <b>5</b> Fragen
+              <b>1</b> von <b id="questionAmount">5</b> Fragen
             </div>
             <div class="card-bottom-right">
               <button type="button" class="btn btn-primary">Nächste Frage</button>
