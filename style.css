@@ -69,13 +69,18 @@ body{
 .question-card{
     height: initial;
     width: initial;
-    width: 360px;
+    cursor: pointer;
+}
+
+.question-card:hover{
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .card-body{
     flex: inherit;
     display: flex;
     align-items: center;
+    width: 360px;
 }
 
 .card-image{
@@ -143,6 +148,7 @@ body{
 
 .question-letter{
     background-color: lightgray;
+    color: black;
     width: 30px;
     height: 30px;
     border-radius: 4px;
@@ -150,4 +156,8 @@ body{
     justify-content: center;
     align-items: center;
     margin-right: 8px;
+}
+
+.bg-danger , .bg-success{
+    color: white;
 }

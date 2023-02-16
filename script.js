@@ -57,12 +57,15 @@ const questions = [
     }
  ];
 
+ 
  let currentQuestion = 0;
+
 
  function init(){
     document.getElementById('questionAmount').innerHTML = questions.length;
     showQuestion();
  }
+
 
  function showQuestion(){
     let question = questions[currentQuestion];
@@ -72,4 +75,16 @@ const questions = [
     document.getElementById('answer_3').innerHTML = `<div class="question-letter"><b>C</b></div>` + question['answer_3'];
     document.getElementById('answer_4').innerHTML = `<div class="question-letter"><b>D</b></div>` + question['answer_4'];
 
+ }
+
+ 
+ function answer(selection){
+   let correctAnswer = questions[currentQuestion]['right_answer']
+   let selectedAnswerNumber = selection.slice(-1);
+
+   if (selectedAnswerNumber == correctAnswer) {
+      document.getElementById(selection).parentNode.classList.add("bg-success") 
+   } else {
+      document.getElementById(selection).parentNode.classList.add("bg-danger") 
+   }
  }
