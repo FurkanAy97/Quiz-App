@@ -48,10 +48,10 @@
           </div>
           <div class="card-bottom">
             <div class="card-bottom-left">
-              <b>1</b> von <b id="questionAmount">5</b> Fragen
+              <b id="questionNumber">1</b> von <b id="questionAmount">5</b> Fragen
             </div>
             <div class="card-bottom-right">
-              <button type="button" class="btn btn-primary">Nächste Frage</button>
+              <button type="button" disabled id="next-button" onclick="disableButton(); nextQuestion();" class="btn btn-primary">Nächste Frage</button>
             </div>
           </div>
         </div>

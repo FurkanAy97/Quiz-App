@@ -16,12 +16,12 @@ const questions = [
        "right_answer":2
     },
     {
-       "question":"Welches HTML-Element wird verwendet, um eine geordnete Liste zu erstellen?",
-       "answer_1":"<ul>",
-       "answer_2":"<li>",
-       "answer_3":"<ol>",
-       "answer_4":"<dl>",
-       "right_answer":3
+       "question":"Was ist der Zweck des (head) Elements in HTML??",
+       "answer_1":"Es definiert den Hauptinhalt der Webseite",
+       "answer_2":"Es definiert den Fußbereich der Webseite",
+       "answer_3":"Es definiert die Navigationsleiste der Webseite",
+       "answer_4":"Es enthält Metadaten über die Webseite, wie z.B. den Titel, die Beschreibung oder die Codierung",
+       "right_answer":4
     },
     {
        "question":"Was ist der Zweck des (href) Attributs in einem (a) Tag?",
@@ -32,12 +32,12 @@ const questions = [
        "right_answer":4
     },
     {
-       "question":"Welches HTML-Element wird verwendet, um einen Absatz zu erstellen?",
-       "answer_1":"<p>",
-       "answer_2":"<br>",
-       "answer_3":"<div>",
-       "answer_4":"<span>",
-       "right_answer":1
+       "question":"Was ist der Zweck des (form) Elements in HTML??",
+       "answer_1":"Es definiert den Inhalt der Webseite",
+       "answer_2":"Es definiert den Hauptbereich der Webseite",
+       "answer_3":"Es definiert ein Formular, in dem der Nutzer Eingaben tätigen kann",
+       "answer_4":"Es definiert eine Tabelle mit Daten",
+       "right_answer":3
     },
     {
        "question":"Was ist der Zweck des (title) Attributs in einem (a) Tag?",
@@ -48,17 +48,18 @@ const questions = [
        "right_answer":4
     },
     {
-       "question":"Welches HTML-Element wird verwendet, um eine Tabelle zu erstellen?",
-       "answer_1":"<table>",
-       "answer_2":"<div>",
-       "answer_3":"<p>",
-       "answer_4":"<span>",
-       "right_answer":1
+       "question":"Was ist der Zweck der HTML-Auszeichnungssprache?",
+       "answer_1":"Es definiert eine Tabelle mit Daten",
+       "answer_2":"Sie beschreibt, wie die Inhalte auf der Webseite angezeigt werden sollen",
+       "answer_3":"Sie ermöglicht es, interaktive Elemente auf der Webseite einzubinden",
+       "answer_4":"Sie sorgt dafür, dass die Webseite auf allen Geräten und in allen Browsern gleich dargestellt wird",
+       "right_answer":2
     }
  ];
 
  
  let currentQuestion = 0;
+ let shownQuestionNumber = 1;
 
 
  function init(){
@@ -74,17 +75,55 @@ const questions = [
     document.getElementById('answer_2').innerHTML = `<div class="question-letter"><b>B</b></div>` + question['answer_2'];
     document.getElementById('answer_3').innerHTML = `<div class="question-letter"><b>C</b></div>` + question['answer_3'];
     document.getElementById('answer_4').innerHTML = `<div class="question-letter"><b>D</b></div>` + question['answer_4'];
+    checkIfLastQuestion();
+ }
 
+
+ function checkIfLastQuestion(){
+   let questionAmount = document.getElementById('questionAmount').innerHTML
+   if (shownQuestionNumber == questionAmount) {
+      document.getElementById('next-button').innerHTML = `Ergebniss`;
+      document.getElementById('next-button').disabled = false;
+   }
  }
 
  
  function answer(selection){
    let correctAnswer = questions[currentQuestion]['right_answer']
    let selectedAnswerNumber = selection.slice(-1);
-
-   if (selectedAnswerNumber == correctAnswer) {
+   let idOfRightAnswer = `answer_${questions[currentQuestion]['right_answer']}`
+   if (selectedAnswerNumber == correctAnswer){
       document.getElementById(selection).parentNode.classList.add("bg-success") 
    } else {
       document.getElementById(selection).parentNode.classList.add("bg-danger") 
+      document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success") 
    }
+   document.getElementById('next-button').disabled = false;
+ }
+
+
+ function disableButton(){
+   document.getElementById('next-button').disabled = true;
+ }
+
+ function nextQuestion() {
+   let questionAmount = document.getElementById('questionAmount').innerHTML
+   if (shownQuestionNumber < questionAmount) {
+      currentQuestion++;
+      shownQuestionNumber++;
+      document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
+      removeColors();
+      showQuestion();
+   }
+ }
+ 
+ function removeColors(){
+   document.getElementById('answer_1').parentNode.classList.remove('bg-danger')
+   document.getElementById('answer_1').parentNode.classList.remove('bg-success')
+   document.getElementById('answer_2').parentNode.classList.remove('bg-danger')
+   document.getElementById('answer_2').parentNode.classList.remove('bg-success')
+   document.getElementById('answer_3').parentNode.classList.remove('bg-danger')
+   document.getElementById('answer_3').parentNode.classList.remove('bg-success')
+   document.getElementById('answer_4').parentNode.classList.remove('bg-danger')
+   document.getElementById('answer_4').parentNode.classList.remove('bg-success')
  }
