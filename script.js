@@ -60,6 +60,7 @@ const questions = [
  
  let currentQuestion = 0;
  let shownQuestionNumber = 1;
+ let correctAnswerAmount = 0;
 
 
  function init(){
@@ -94,6 +95,7 @@ const questions = [
    let idOfRightAnswer = `answer_${questions[currentQuestion]['right_answer']}`
    if (selectedAnswerNumber == correctAnswer){
       document.getElementById(selection).parentNode.classList.add("bg-success") 
+      correctAnswerAmount++; /* counts the correctly answered questions */
    } else {
       document.getElementById(selection).parentNode.classList.add("bg-danger") 
       document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success") 
@@ -108,14 +110,35 @@ const questions = [
 
  function nextQuestion() {
    let questionAmount = document.getElementById('questionAmount').innerHTML
-   if (shownQuestionNumber < questionAmount) {
-      currentQuestion++;
-      shownQuestionNumber++;
-      document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
-      removeColors();
-      showQuestion();
+   if (shownQuestionNumber == questionAmount) {
+      showResultPage();
+   } else {
+      if (shownQuestionNumber < questionAmount) {
+         currentQuestion++;
+         shownQuestionNumber++;
+         document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
+         removeColors();
+         showQuestion();
+      }
    }
  }
+
+ function showResultPage(){
+   document.getElementById('card-right').innerHTML = ``;
+   document.getElementById('card-right').innerHTML = resultPageTemplate();
+ }
+
+
+ function resultPageTemplate(){
+   return `
+   <div class="result-page">
+      <img id="result-img" src="img/brain result.png">
+      <h2>COMPLETE HTML QUIZ</h2>
+      <span>YOUR SCORE ${correctAnswerAmount}/${questions.length}</span>
+    </div>
+   `;
+ }
+
  
  function removeColors(){
    document.getElementById('answer_1').parentNode.classList.remove('bg-danger')
