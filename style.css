@@ -173,3 +173,16 @@
 .result-img{
     width: 100px;
 }
+
+#trophy{
+    position: absolute;
+    top: 0;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+
+@media (max-width: 750px){
+    
+}

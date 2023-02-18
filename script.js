@@ -66,6 +66,7 @@ const questions = [
  function init(){
     document.getElementById('questionAmount').innerHTML = questions.length;
     showQuestion();
+    calculateProgressBar();
  }
 
 
@@ -84,7 +85,6 @@ const questions = [
    let questionAmount = document.getElementById('questionAmount').innerHTML
    if (shownQuestionNumber == questionAmount) {
       document.getElementById('next-button').innerHTML = `Ergebniss`;
-      document.getElementById('next-button').disabled = false;
    }
  }
 
@@ -112,6 +112,9 @@ const questions = [
    let questionAmount = document.getElementById('questionAmount').innerHTML
    if (shownQuestionNumber == questionAmount) {
       showResultPage();
+      document.getElementById('trophy').style=""
+      document.getElementById('progressBar').innerHTML = `100%`;
+      document.getElementById('progressBar').style = `width: 100%`;
    } else {
       if (shownQuestionNumber < questionAmount) {
          currentQuestion++;
@@ -119,9 +122,19 @@ const questions = [
          document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
          removeColors();
          showQuestion();
+         calculateProgressBar();
       }
    }
  }
+
+
+ function calculateProgressBar() {
+   let progress = Math.floor((100 / questions.length) * (shownQuestionNumber -1));
+   document.getElementById('progressBar').innerHTML = `${progress}%`;
+   document.getElementById('progressBar').style = `width: ${progress}%`;
+ }
+ 
+
 
  function showResultPage(){
    document.getElementById('card-right').innerHTML = ``;
