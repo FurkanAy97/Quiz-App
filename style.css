@@ -184,5 +184,32 @@
 
 
 @media (max-width: 750px){
-    
+    .card-body {
+        width: 350px;
+    }
+
+    .card{
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card-title{
+        text-align: center;
+        width: 350px;
+    }
+
+    .card-bottom{
+        width: 350px;
+        right: unset;
+        left: unset;
+    }
+
+    .navbar>.container-fluid{
+        justify-content: center;
+    }
+
+    #trophy{
+        display: none;
+    }
 }
