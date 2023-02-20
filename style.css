@@ -212,4 +212,8 @@
     #trophy{
         display: none;
     }
+
+    .card-left{
+        display: none;
+    }
 }
