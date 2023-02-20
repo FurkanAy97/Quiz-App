@@ -61,6 +61,8 @@ const questions = [
  let currentQuestion = 0;
  let shownQuestionNumber = 1;
  let correctAnswerAmount = 0;
+ let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+ let AUDIO_FAIL = new Audio('audio/wrong.mp3');
 
 
  function init(){
@@ -93,14 +95,27 @@ const questions = [
    let correctAnswer = questions[currentQuestion]['right_answer']
    let selectedAnswerNumber = selection.slice(-1);
    let idOfRightAnswer = `answer_${questions[currentQuestion]['right_answer']}`
-   if (selectedAnswerNumber == correctAnswer){
-      document.getElementById(selection).parentNode.classList.add("bg-success") 
-      correctAnswerAmount++; /* counts the correctly answered questions */
+   
+   if (selectedAnswerNumber == correctAnswer){     /* check if answer is correct */
+      answerIsCorrect(selection);
    } else {
-      document.getElementById(selection).parentNode.classList.add("bg-danger") 
-      document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success") 
+      wrongAnswer(selection, idOfRightAnswer);
    }
    document.getElementById('next-button').disabled = false;
+ }
+
+
+ function answerIsCorrect(selection){
+   document.getElementById(selection).parentNode.classList.add("bg-success") 
+   AUDIO_SUCCESS.play();
+   correctAnswerAmount++;     /* counts the correctly answered questions */
+ }
+
+
+ function wrongAnswer(selection, idOfRightAnswer){
+   document.getElementById(selection).parentNode.classList.add("bg-danger") 
+   document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success") 
+   AUDIO_FAIL.play();
  }
 
 
@@ -108,24 +123,33 @@ const questions = [
    document.getElementById('next-button').disabled = true;
  }
 
+
  function nextQuestion() {
    let questionAmount = document.getElementById('questionAmount').innerHTML
-   if (shownQuestionNumber == questionAmount) {
-      showResultPage();
-      document.getElementById('trophy').style=""
-      document.getElementById('progressBar').innerHTML = `100%`;
-      document.getElementById('progressBar').style = `width: 100%`;
+   if (shownQuestionNumber == questionAmount) {    /* checks if its the last question */
+      initResultPage();
    } else {
-      if (shownQuestionNumber < questionAmount) {
-         currentQuestion++;
-         shownQuestionNumber++;
-         document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
-         removeColors();
-         showQuestion();
-         calculateProgressBar();
-      }
+      initNextQuestion();
    }
  }
+
+
+ function initResultPage(){
+   showResultPage();
+   document.getElementById('trophy').style=""
+   document.getElementById('progressBar').innerHTML = `100%`;
+   document.getElementById('progressBar').style = `width: 100%`;
+}
+
+
+function initNextQuestion(){
+   currentQuestion++;
+   shownQuestionNumber++;
+   document.getElementById('questionNumber').innerHTML = shownQuestionNumber;
+   removeColors();
+   showQuestion();
+   calculateProgressBar();
+}
 
 
  function calculateProgressBar() {
@@ -134,7 +158,6 @@ const questions = [
    document.getElementById('progressBar').style = `width: ${progress}%`;
  }
  
-
 
  function showResultPage(){
    document.getElementById('card-right').innerHTML = ``;
@@ -146,20 +169,57 @@ const questions = [
    return `
    <div class="result-page">
       <img id="result-img" src="img/brain result.png">
-      <h2>COMPLETE HTML QUIZ</h2>
+      <h2>COMPLETED HTML QUIZ</h2>
       <span>YOUR SCORE ${correctAnswerAmount}/${questions.length}</span>
+      <button class="btn btn-primary" onclick="resetGame()">Spiel wiederholen</button>
     </div>
    `;
  }
 
- 
- function removeColors(){
-   document.getElementById('answer_1').parentNode.classList.remove('bg-danger')
-   document.getElementById('answer_1').parentNode.classList.remove('bg-success')
-   document.getElementById('answer_2').parentNode.classList.remove('bg-danger')
-   document.getElementById('answer_2').parentNode.classList.remove('bg-success')
-   document.getElementById('answer_3').parentNode.classList.remove('bg-danger')
-   document.getElementById('answer_3').parentNode.classList.remove('bg-success')
-   document.getElementById('answer_4').parentNode.classList.remove('bg-danger')
-   document.getElementById('answer_4').parentNode.classList.remove('bg-success')
+
+ function resetGame(){
+   currentQuestion = 0;
+   shownQuestionNumber = 1;
+   correctAnswerAmount = 0;
+   document.getElementById('card-right').innerHTML = quizTemplateHTML();
+   init();
+
  }
+
+
+ function quizTemplateHTML(){
+   return ` <h5 class="card-title" id="questionText">Frage</h5>
+            <div class="question-container">
+               <div class="card question-card mb-3" onclick="answer('answer_1')">
+               <div class="card-body" id="answer_1"></div>
+               </div>
+               <div class="card question-card mb-3" onclick="answer('answer_2')">
+               <div class="card-body" id="answer_2"></div>
+               </div>
+               <div class="card question-card mb-3" onclick="answer('answer_3')">
+               <div class="card-body" id="answer_3"></div>
+               </div>
+               <div class="card question-card mb-3" onclick="answer('answer_4')">
+               <div class="card-body" id="answer_4"></div>
+               </div>
+            </div>
+            <div class="card-bottom">
+               <div class="card-bottom-left">
+               <b id="questionNumber">1</b> von <b id="questionAmount">${questions.length}</b> Fragen
+               </div>
+               <div class="card-bottom-right">
+               <button type="button" disabled id="next-button" onclick="disableButton(); nextQuestion();" class="btn btn-primary">Nächste Frage</button>
+               </div>
+            </div>
+   `;
+ }
+ 
+ 
+ function removeColors() {
+   for (let i = 1; i <= 4; i++) {
+     const answerNode = document.getElementById('answer_' + i);
+     answerNode.parentNode.classList.remove('bg-danger');
+     answerNode.parentNode.classList.remove('bg-success');
+   }
+ }
+ 
