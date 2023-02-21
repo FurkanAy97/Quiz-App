@@ -28,12 +28,15 @@
     <div class="card-container">
       <div class="card">
         <div class="card-left">
-          <img src="img/logo.png" class="card-image" />
-          <a href="#">HTML</a>
-          <a href="#">CSS</a>
-          <a href="#">JS</a>
+          <img src="img/logo.png" class="card-image" />               <!-- TODO: push to github -->
+          <a href="#" onclick="changeToHTML()">HTML</a>
+          <a href="#" onclick="changeToCSS()">CSS</a>
         </div>
         <div class="card-right" id="card-right">
+          <div class="category-buttons-mobile">
+            <a href="#" onclick="changeToHTML()">HTML</a>
+            <a href="#" onclick="changeToCSS()">CSS</a>
+          </div>
           <h5 class="card-title" id="questionText">Frage</h5>
           <div class="question-container">
             <div class="card question-card mb-3" onclick="answer('answer_1')">

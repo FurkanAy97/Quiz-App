@@ -42,9 +42,9 @@
   
   
 
-  body {
+body {
     background-color: #FEFAEF;
-  }
+}
   
 
 .card-container{
@@ -57,16 +57,19 @@
 .card {
     display: flex;
     flex-direction: row;
-    height: 500px;
+    height: 580px;
     width: 900px;
     border-radius: 10px;
 }
 
 .card-title{
     margin-bottom: 38px;
+    font-family: 'rubik';
+    font-weight: 500;
 }
 
 .question-card{
+    font-family: 'rubik';
     height: initial;
     width: initial;
     cursor: pointer;
@@ -81,19 +84,18 @@
     display: flex;
     align-items: center;
     width: 360px;
+    pointer-events: none;
 }
+
 
 .card-image{
     left:0;
     right:0;
     top: 16px;
-
     margin-left: auto;
     margin-right: auto;
-
     position: absolute;
     width: 40%;
-
 }
 
 .card-left{
@@ -109,6 +111,7 @@
 
 .card-left a{
     text-decoration: none;
+    font-family: 'rubik';
     color: gray;
     font-size: 24px;
     margin-top: 8px;
@@ -170,6 +173,19 @@
     align-items: center;
 }
 
+.result-page h2{
+    font-family: 'rubik';
+    font-weight: bold;
+}
+
+.result-page span{
+    font-family: 'rubik';
+}
+
+.result-page button{
+    font-family: 'rubik';
+}
+
 .result-img{
     width: 100px;
 }
@@ -182,8 +198,30 @@
     transform: translate(0, -50%);
 }
 
+.category-buttons-mobile{
+    display: none;
+}
 
 @media (max-width: 750px){
+
+    .category-buttons-mobile{
+        display: unset;
+        position: absolute;
+        top: 32px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .category-buttons-mobile a{
+        font-size: 32px;
+        color: rgba(0, 0, 0, 0.5);
+        text-decoration: none;
+        
+    }
+
     .card-body {
         width: 350px;
     }
