@@ -122,14 +122,15 @@ const questions = [
  }
 
 
- function enableAnswers(){
+ function enableAnswers() {
    for (let i = 1; i <= 4; i++) {
-      const answerNode = document.getElementById('answer_' + i);
-      answerNode.parentNode.style.setProperty('pointer-events', 'auto');
-    }
+     const answerNode = document.getElementById('answer_' + i);
+     if (answerNode) {
+       answerNode.parentNode.style.setProperty('pointer-events', 'auto');
+     }
+   }
  }
  
-
 
  function wrongAnswer(selection, idOfRightAnswer){
    document.getElementById(selection).parentNode.classList.add("bg-danger") 
